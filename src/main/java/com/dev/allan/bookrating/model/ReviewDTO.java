@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class ReviewDTO {
-    @NotNull
+    @NotNull(message = "bookId must not be null")
     private Integer bookId;
 
     @NotNull

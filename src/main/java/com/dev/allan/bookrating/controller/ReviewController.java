@@ -23,6 +23,12 @@ public class ReviewController {
 
     @PostMapping
     public ResponseEntity<String> createReview(@Valid @RequestBody ReviewDTO reviewDTO) {
+        if (reviewDTO.getBookId() == null) {
+            return new ResponseEntity<>("bookId can not be null", HttpStatus.BAD_REQUEST);
+        }
+        if (reviewDTO.getRating() < 0 || reviewDTO.getRating() > 5) {
+            return new ResponseEntity<>("Rating needs to be between 0 and 5", HttpStatus.BAD_REQUEST);
+        }
         reviewService.createReview(reviewDTO);
         return new ResponseEntity<>("Review submitted successfully", HttpStatus.CREATED);
     }
